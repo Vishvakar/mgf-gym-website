@@ -1,0 +1,1634 @@
+/* ============================================================
+   MGF GYM - STYLE.CSS
+   ============================================================
+   Theme: Black, White & Golden Yellow (#FFC107)
+   Fonts: Bebas Neue (headings) + Poppins (body)
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   SECTION 1: CSS CUSTOM PROPERTIES (Variables)
+   Define all colors and reusable values in one place
+   ---------------------------------------------------------- */
+:root {
+    --black:        #111111;   /* Primary dark background */
+    --black-light:  #1a1a1a;   /* Slightly lighter dark for alternating sections */
+    --black-lighter:#222222;   /* Card/image placeholder backgrounds */
+    --gold:         #FFC107;   /* Primary accent color - golden yellow */
+    --gold-dark:    #e6ac00;   /* Darker gold for hover states */
+    --white:        #FFFFFF;   /* Primary text color */
+    --gray:         #888888;   /* Secondary/muted text */
+    --gray-light:   #cccccc;   /* Light gray for subtle text */
+}
+
+/* ----------------------------------------------------------
+   SECTION 2: GLOBAL RESET & BASE STYLES
+   Remove default browser margins/paddings and set base styles
+   ---------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;   /* Include padding/border in element width */
+}
+
+html {
+    scroll-behavior: smooth;   /* Smooth scrolling for anchor links */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--black);
+    color: var(--white);
+    overflow-x: hidden;        /* Prevent horizontal scroll */
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--black);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--gold);
+    border-radius: 4px;
+}
+
+/* ----------------------------------------------------------
+   SECTION 3: KEYFRAME ANIMATIONS
+   Reusable animation definitions for the entire site
+   ---------------------------------------------------------- */
+
+/* Fade in and slide up - used for hero text and scroll reveals */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Simple fade in */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Pulsing glow effect - used on special offer badge */
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.3); }
+    50%      { box-shadow: 0 0 40px rgba(255, 193, 7, 0.6); }
+}
+
+/* Gentle pulse scale - used on special offer background */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.05); }
+}
+
+/* Floating up/down - used on scroll indicator arrow */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+}
+
+/* ----------------------------------------------------------
+   SECTION 4: SCROLL REVEAL ANIMATION CLASSES
+   Elements with .animate-on-scroll start hidden and fade in
+   when they enter the viewport (triggered by JS IntersectionObserver)
+   ---------------------------------------------------------- */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+}
+.animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered delay classes for cascading reveal effects */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+
+/* ----------------------------------------------------------
+   SECTION 5: NAVIGATION BAR
+   Fixed top navbar that changes style on scroll
+   ---------------------------------------------------------- */
+nav {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease;
+}
+
+/* Navbar style when page is scrolled down */
+nav.scrolled {
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(20px);        /* Frosted glass blur effect */
+    padding: 15px 5%;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* MGF GYM Logo - uses Bebas Neue font with gold color */
+.logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Bull SVG logo inside the navbar */
+.logo svg {
+    width: 42px;
+    height: 42px;
+}
+
+/* Desktop navigation links (hidden on mobile) */
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+}
+
+.nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Animated underline on hover */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+}
+.nav-links a:hover {
+    color: var(--gold);
+}
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Hamburger menu button (visible only on mobile) */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* ----------------------------------------------------------
+   SECTION 6: HERO SECTION
+   Full-screen banner with background image and overlay
+   ---------------------------------------------------------- */
+.hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Background image layer */
+.hero-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: url('https://kimi-web-img.moonshot.cn/img/img.magnific.com/cfc06f4fa476b6ed238c1b38759cd4a2f01d33bc.jpg') center/cover no-repeat;
+    filter: brightness(0.35);   /* Darken the background image */
+}
+
+/* Gradient overlay on top of background */
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(17,17,17,0.9) 0%, rgba(17,17,17,0.6) 50%, rgba(17,17,17,0.8) 100%);
+}
+
+/* Hero text content container */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 5%;
+    max-width: 900px;
+}
+
+/* Small gold subtitle above main heading */
+.hero-subtitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Main hero heading - large Bebas Neue text */
+.hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 10vw, 7rem);   /* Responsive font size */
+    line-height: 1;
+    letter-spacing: 5px;
+    margin-bottom: 15px;
+    animation: fadeInUp 1s ease-out 0.2s both;
+}
+.hero-title span {
+    color: var(--gold);
+}
+
+/* Tagline below heading */
+.hero-tagline {
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--gray-light);
+    letter-spacing: 10px;
+    margin-bottom: 25px;
+    animation: fadeInUp 1s ease-out 0.4s both;
+}
+
+/* Description paragraph */
+.hero-desc {
+    font-size: 1.05rem;
+    color: var(--gray);
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+/* Hero CTA buttons container */
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeInUp 1s ease-out 0.8s both;
+}
+
+/* Bouncing scroll-down arrow at bottom of hero */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: float 2s ease-in-out infinite;
+    z-index: 2;
+}
+.scroll-indicator i {
+    font-size: 2rem;
+    color: var(--gold);
+}
+
+/* ----------------------------------------------------------
+   SECTION 7: GLOBAL SECTION STYLES
+   Common styles reused across all content sections
+   ---------------------------------------------------------- */
+section {
+    padding: 100px 5%;
+    position: relative;
+}
+
+/* Section header with label, title, and description */
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+/* Small gold uppercase label (e.g., "About Us", "Our Programs") */
+.section-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+/* Large section heading using Bebas Neue */
+.section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: 3px;
+    line-height: 1.1;
+}
+.section-title span {
+    color: var(--gold);
+}
+
+/* Section description paragraph */
+.section-desc {
+    color: var(--gray);
+    max-width: 600px;
+    margin: 15px auto 0;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* ----------------------------------------------------------
+   SECTION 8: BUTTON COMPONENTS
+   Reusable button styles used throughout the site
+   ---------------------------------------------------------- */
+.btn {
+    padding: 15px 40px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    border: 2px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Primary gold button */
+.btn-primary {
+    background: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+}
+.btn-primary:hover {
+    background: transparent;
+    color: var(--gold);
+    box-shadow: 0 0 30px rgba(255, 193, 7, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Secondary outline button */
+.btn-secondary {
+    background: transparent;
+    color: var(--white);
+    border-color: var(--white);
+}
+.btn-secondary:hover {
+    background: var(--white);
+    color: var(--black);
+    transform: translateY(-3px);
+}
+
+/* ----------------------------------------------------------
+   SECTION 9: ABOUT SECTION
+   Two-column layout: image + text with features grid
+   ---------------------------------------------------------- */
+.about {
+    background: var(--black);
+}
+
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.about-image {
+    position: relative;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* Decorative gold border behind image */
+.about-image::before {
+    content: '';
+    position: absolute;
+    top: -20px; left: -20px;
+    width: 100%; height: 100%;
+    border: 3px solid var(--gold);
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.about-content h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+.about-content h3 span {
+    color: var(--gold);
+}
+
+.about-content p {
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+/* Grid of feature items with icons */
+.about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.about-feature {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.about-feature i {
+    width: 40px; height: 40px;
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.about-feature span {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* ----------------------------------------------------------
+   SECTION 10: PROGRAMS SECTION
+   6-card grid showcasing different training programs
+   ---------------------------------------------------------- */
+.programs {
+    background: var(--black-light);
+}
+
+.programs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* Glassmorphism program cards */
+.program-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Gold top border that animates on hover */
+.program-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 4px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+.program-card:hover::before {
+    transform: scaleX(1);
+}
+
+.program-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 193, 7, 0.3);
+    box-shadow: 0 20px 40px rgba(255, 193, 7, 0.1);
+}
+
+/* Circular icon container */
+.program-icon {
+    width: 80px; height: 80px;
+    background: rgba(255, 193, 7, 0.1);
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    font-size: 2rem;
+    color: var(--gold);
+    transition: all 0.4s ease;
+}
+
+/* Icon flips and changes color on card hover */
+.program-card:hover .program-icon {
+    background: var(--gold);
+    color: var(--black);
+    transform: rotateY(360deg);
+}
+
+.program-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.program-card p {
+    color: var(--gray);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+/* Small outline button inside program cards */
+.program-card .btn-small {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 30px;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+.program-card .btn-small:hover {
+    background: var(--gold);
+    color: var(--black);
+}
+
+/* ----------------------------------------------------------
+   SECTION 11: MEMBERSHIP / PRICING SECTION
+   Special offer banner + 3 pricing cards
+   ---------------------------------------------------------- */
+.membership {
+    background: var(--black);
+}
+
+/* Special offer banner with animated glow */
+.special-offer {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
+    border: 2px solid var(--gold);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated radial glow behind offer */
+.special-offer::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,193,7,0.1) 0%, transparent 70%);
+    animation: pulse 4s ease-in-out infinite;
+}
+
+/* "LIMITED TIME OFFER" badge */
+.offer-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--black);
+    padding: 8px 25px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    animation: glow 2s ease-in-out infinite;
+}
+
+.special-offer h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.special-offer .subtitle {
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Two offer cards side by side inside special offer */
+.offer-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.offer-card {
+    background: rgba(17, 17, 17, 0.8);
+    border-radius: 15px;
+    padding: 30px;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.offer-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.offer-card .price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: var(--gold);
+}
+
+.offer-card .price span {
+    font-size: 1.2rem;
+    color: var(--gray);
+}
+
+/* Main pricing cards grid */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.pricing-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+/* Featured card - slightly larger with gold border */
+.pricing-card.featured {
+    border: 2px solid var(--gold);
+    transform: scale(1.05);
+    background: rgba(255, 193, 7, 0.05);
+}
+
+/* "BEST VALUE" badge on featured card */
+.pricing-card.featured::before {
+    content: 'BEST VALUE';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--black);
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+.pricing-card.featured:hover {
+    transform: scale(1.05) translateY(-10px);
+}
+
+.pricing-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.pricing-card .price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: var(--gold);
+    margin: 20px 0;
+}
+
+.pricing-card .price span {
+    font-size: 1rem;
+    color: var(--gray);
+    font-family: 'Poppins', sans-serif;
+}
+
+.pricing-card .features {
+    list-style: none;
+    margin: 25px 0;
+}
+
+.pricing-card .features li {
+    padding: 10px 0;
+    color: var(--gray);
+    font-size: 0.95rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.pricing-card .features li:last-child {
+    border-bottom: none;
+}
+.pricing-card .features li i {
+    color: var(--gold);
+    margin-right: 10px;
+}
+
+/* ----------------------------------------------------------
+   SECTION 12: TRAINERS SECTION
+   Trainer cards with photo placeholder, info, and social links
+   ---------------------------------------------------------- */
+.trainers {
+    background: var(--black-light);
+}
+
+.trainers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.trainer-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    text-align: center;
+}
+
+.trainer-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 193, 7, 0.3);
+}
+
+/* Trainer photo area - shows placeholder icon by default */
+.trainer-img {
+    width: 100%;
+    height: 300px;
+    background: var(--black-lighter);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.trainer-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.trainer-card:hover .trainer-img img {
+    transform: scale(1.1);
+}
+
+/* Default placeholder icon when no photo is added */
+.trainer-img .placeholder {
+    font-size: 5rem;
+    color: var(--gold);
+    opacity: 0.3;
+}
+
+.trainer-info {
+    padding: 30px;
+}
+
+.trainer-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.trainer-info .exp {
+    color: var(--gold);
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.trainer-info .specialty {
+    color: var(--gray);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+/* Social media icon links */
+.trainer-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.trainer-social a {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.trainer-social a:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+    transform: translateY(-3px);
+}
+
+/* ----------------------------------------------------------
+   SECTION 13: WHY CHOOSE SECTION
+   6 feature cards with icon + text layout
+   ---------------------------------------------------------- */
+.why-choose {
+    background: var(--black);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 40px 30px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    transition: all 0.4s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 193, 7, 0.3);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.feature-icon {
+    width: 60px; height: 60px;
+    background: rgba(255, 193, 7, 0.1);
+    border: 2px solid var(--gold);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.feature-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
+    color: var(--gray);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+/* ----------------------------------------------------------
+   SECTION 14: GALLERY SECTION
+   Responsive image grid with hover zoom effect
+   ---------------------------------------------------------- */
+.gallery {
+    background: var(--black-light);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 250px);
+    gap: 15px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.15);
+}
+
+/* Dark overlay on hover */
+.gallery-item::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(17, 17, 17, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+/* Image label that appears on hover */
+.gallery-item span {
+    position: absolute;
+    bottom: 15px; left: 15px;
+    font-weight: 600;
+    font-size: 1rem;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+.gallery-item:hover span {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Grid spanning for masonry-like layout */
+.gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.gallery-item:nth-child(2) { grid-column: span 1; grid-row: span 1; }
+.gallery-item:nth-child(3) { grid-column: span 1; grid-row: span 1; }
+.gallery-item:nth-child(4) { grid-column: span 1; grid-row: span 1; }
+.gallery-item:nth-child(5) { grid-column: span 1; grid-row: span 1; }
+
+/* ----------------------------------------------------------
+   SECTION 15: BMI CALCULATOR
+   Interactive health tool with color-coded results
+   ---------------------------------------------------------- */
+.bmi-section {
+    background: var(--black);
+}
+
+.bmi-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 50px 40px;
+    text-align: center;
+}
+
+.bmi-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.bmi-input-group {
+    text-align: left;
+}
+
+.bmi-input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--gray-light);
+}
+
+.bmi-input-group input {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.bmi-input-group input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.2);
+}
+
+.bmi-input-group input::placeholder {
+    color: var(--gray);
+}
+
+/* BMI result panel - hidden by default, shown by JS */
+.bmi-result {
+    display: none;
+    margin-top: 30px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bmi-result.show {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.bmi-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    color: var(--gold);
+    line-height: 1;
+}
+
+/* Color-coded BMI status badges */
+.bmi-status {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-top: 10px;
+    padding: 10px 25px;
+    border-radius: 30px;
+    display: inline-block;
+}
+
+.bmi-status.underweight { background: rgba(52, 152, 219, 0.2); color: #3498db; }
+.bmi-status.normal      { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+.bmi-status.overweight  { background: rgba(241, 196, 15, 0.2); color: #f1c40f; }
+.bmi-status.obese       { background: rgba(231, 76, 60, 0.2);  color: #e74c3c; }
+
+/* BMI reference scale at bottom */
+.bmi-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+}
+
+.bmi-scale-item {
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.bmi-scale-item .range {
+    font-weight: 700;
+    color: var(--gold);
+}
+
+.bmi-scale-item .label {
+    color: var(--gray);
+    margin-top: 5px;
+}
+
+/* ----------------------------------------------------------
+   SECTION 16: TESTIMONIALS SECTION
+   Customer review cards with ratings
+   ---------------------------------------------------------- */
+.testimonials {
+    background: var(--black-light);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 40px 30px;
+    position: relative;
+    transition: all 0.4s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 193, 7, 0.2);
+}
+
+/* Decorative large quotation mark */
+.testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: 20px; right: 30px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    color: rgba(255, 193, 7, 0.15);
+    line-height: 1;
+}
+
+.testimonial-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.testimonial-img {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: var(--black-lighter);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--gold);
+    overflow: hidden;
+}
+
+.testimonial-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testimonial-img i {
+    font-size: 1.5rem;
+    color: var(--gold);
+}
+
+.testimonial-info h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.stars {
+    color: var(--gold);
+    font-size: 0.85rem;
+    margin-top: 3px;
+}
+
+.testimonial-card p {
+    color: var(--gray);
+    line-height: 1.8;
+    font-size: 0.95rem;
+}
+
+/* ----------------------------------------------------------
+   SECTION 17: CONTACT SECTION
+   Two-column: Contact info + map on left, form on right
+   ---------------------------------------------------------- */
+.contact {
+    background: var(--black);
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.contact-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.contact-info h3 span {
+    color: var(--gold);
+}
+
+.contact-info > p {
+    color: var(--gray);
+    margin-bottom: 30px;
+    line-height: 1.7;
+}
+
+.contact-details {
+    margin-bottom: 30px;
+}
+
+/* Individual contact item (address, phone, email, timing) */
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.contact-item i {
+    width: 50px; height: 50px;
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.contact-item div h4 {
+    font-size: 1rem;
+    margin-bottom: 3px;
+}
+
+.contact-item div p {
+    color: var(--gray);
+    font-size: 0.95rem;
+}
+
+/* Embedded Google Map with dark theme filter */
+.map-container {
+    width: 100%;
+    height: 250px;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(100%) invert(92%) contrast(83%);
+}
+
+/* Contact form panel */
+.contact-form {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.contact-form h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--gray-light);
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--gray);
+}
+
+/* ----------------------------------------------------------
+   SECTION 18: FOOTER
+   Four-column layout with brand, links, and social icons
+   ---------------------------------------------------------- */
+footer {
+    background: var(--black-light);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 60px 5% 30px;
+}
+
+.footer-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+}
+
+.footer-brand .logo {
+    margin-bottom: 20px;
+}
+
+.footer-brand p {
+    color: var(--gray);
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.footer-social a {
+    width: 45px; height: 45px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-social a:hover {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+    transform: translateY(-3px);
+}
+
+.footer-links h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-links a:hover {
+    color: var(--gold);
+    transform: translateX(5px);
+}
+
+.footer-bottom {
+    max-width: 1300px;
+    margin: 40px auto 0;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.footer-bottom span {
+    color: var(--gold);
+}
+
+/* ----------------------------------------------------------
+   SECTION 19: MOBILE MENU OVERLAY
+   Slide-in menu for mobile devices
+   ---------------------------------------------------------- */
+.mobile-menu {
+    position: fixed;
+    top: 0; right: -100%;
+    width: 80%;
+    max-width: 350px;
+    height: 100vh;
+    background: var(--black-light);
+    z-index: 1001;
+    padding: 80px 30px 30px;
+    transition: right 0.4s ease;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+.mobile-menu ul {
+    list-style: none;
+}
+
+.mobile-menu li {
+    margin-bottom: 20px;
+}
+
+.mobile-menu a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: color 0.3s ease;
+}
+
+.mobile-menu a:hover {
+    color: var(--gold);
+}
+
+.mobile-menu-close {
+    position: absolute;
+    top: 25px; right: 25px;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Dark overlay behind mobile menu */
+.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ----------------------------------------------------------
+   SECTION 20: RESPONSIVE MEDIA QUERIES
+   Tablet and mobile breakpoint adjustments
+   ---------------------------------------------------------- */
+
+/* Tablet breakpoint (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .about-container,
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+
+    .about-image::before {
+        display: none;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 200px);
+    }
+
+    .gallery-item:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+}
+
+/* Mobile breakpoint (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Hide desktop nav, show hamburger */
+    .nav-links {
+        display: none;
+    }
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    /* Hero adjustments */
+    .hero-title {
+        font-size: 3.5rem;
+    }
+    .hero-tagline {
+        font-size: 1rem;
+        letter-spacing: 5px;
+    }
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .btn {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+    }
+
+    /* Single column layouts */
+    .about-features {
+        grid-template-columns: 1fr;
+    }
+    .offer-cards {
+        grid-template-columns: 1fr;
+    }
+
+    /* Reset featured card scale on mobile */
+    .pricing-card.featured {
+        transform: scale(1);
+    }
+    .pricing-card.featured:hover {
+        transform: scale(1) translateY(-10px);
+    }
+
+    .bmi-inputs {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 200px);
+    }
+    .gallery-item:nth-child(1) {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .footer-social {
+        justify-content: center;
+    }
+    .footer-links a:hover {
+        transform: translateX(0);
+    }
+
+    section {
+        padding: 60px 5%;
+    }
+}
