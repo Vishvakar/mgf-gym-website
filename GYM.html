@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ============================================================
+         MGF GYM WEBSITE - INDEX.HTML
+         Main HTML structure linking to external CSS and JS files
+         ============================================================ -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MGF GYM - Stronger Every Day</title>
+
+    <!-- Google Fonts: Bebas Neue (bold headings) + Poppins (body text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons (v6.5.1) for all icons throughout the site -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- External CSS file containing all styles -->
+    <link rel="stylesheet" href="gym.css">
+<base target="_blank">
+</head>
+<body>
+
+    <!-- ============================================================
+         SECTION A: NAVIGATION BAR
+         Fixed top navbar with logo, desktop links, and mobile menu
+         ============================================================ -->
+    <nav id="navbar">
+        <!-- Logo: Bull SVG icon + "MGF GYM" text -->
+        <a href="#" class="logo">
+            <!-- 
+               BULL LOGO SVG
+               Stylized bull head with barbell weights on sides
+               Matches the MGF GYM poster branding
+            -->
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer circle border -->
+                <circle cx="50" cy="50" r="46" fill="none" stroke="#FFC107" stroke-width="3"/>
+
+                <!-- Left barbell weight (3 vertical lines) -->
+                <rect x="14" y="32" width="3" height="36" rx="1" fill="#FFC107"/>
+                <rect x="19" y="32" width="3" height="36" rx="1" fill="#FFC107"/>
+                <rect x="24" y="32" width="3" height="36" rx="1" fill="#FFC107"/>
+
+                <!-- Right barbell weight (3 vertical lines) -->
+                <rect x="73" y="32" width="3" height="36" rx="1" fill="#FFC107"/>
+                <rect x="78" y="32" width="3" height="36" rx="1" fill="#FFC107"/>
+                <rect x="83" y="32" width="3" height="36" rx="1" fill="#FFC107"/>
+
+                <!-- Center barbell bar -->
+                <rect x="27" y="47" width="46" height="6" rx="2" fill="#FFC107"/>
+
+                <!-- Bull head shape -->
+                <path d="M50 20 
+                         C42 20, 36 26, 36 34 
+                         C36 38, 38 42, 40 44
+                         L38 52
+                         C38 52, 42 50, 50 50
+                         C58 50, 62 52, 62 52
+                         L60 44
+                         C62 42, 64 38, 64 34
+                         C64 26, 58 20, 50 20Z" 
+                      fill="#FFC107"/>
+
+                <!-- Bull horns -->
+                <path d="M36 28 C32 22, 28 24, 30 30" fill="none" stroke="#FFC107" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M64 28 C68 22, 72 24, 70 30" fill="none" stroke="#FFC107" stroke-width="2.5" stroke-linecap="round"/>
+
+                <!-- Bull eyes -->
+                <circle cx="44" cy="36" r="2" fill="#111111"/>
+                <circle cx="56" cy="36" r="2" fill="#111111"/>
+
+                <!-- Bull nose ring -->
+                <circle cx="50" cy="46" r="3" fill="none" stroke="#111111" stroke-width="1.5"/>
+            </svg>
+            MGF GYM
+        </a>
+
+        <!-- Desktop navigation links -->
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#membership">Membership</a></li>
+            <li><a href="#trainers">Trainers</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <!-- Mobile hamburger menu button -->
+        <button class="mobile-menu-btn" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- ============================================================
+         SECTION B: MOBILE MENU OVERLAY
+         Slide-in menu panel + dark background overlay
+         ============================================================ -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMenu()">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+            <li><a href="#about" onclick="toggleMenu()">About</a></li>
+            <li><a href="#programs" onclick="toggleMenu()">Programs</a></li>
+            <li><a href="#membership" onclick="toggleMenu()">Membership</a></li>
+            <li><a href="#trainers" onclick="toggleMenu()">Trainers</a></li>
+            <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- ============================================================
+         SECTION C: HERO SECTION
+         Full-screen banner with background image, overlay, and CTA
+         ============================================================ -->
+    <section class="hero" id="home">
+        <!-- Background image layer (muscular athlete) -->
+        <div class="hero-bg"></div>
+        <!-- Dark gradient overlay for text readability -->
+        <div class="hero-overlay"></div>
+
+        <!-- Hero text content -->
+        <div class="hero-content">
+            <p class="hero-subtitle">Welcome to MGF GYM</p>
+            <h1 class="hero-title">STRONGER <span>EVERY DAY</span></h1>
+            <p class="hero-tagline">Focus &bull; Discipline &bull; Consistency</p>
+            <p class="hero-desc">Transform your body, improve your health, and achieve your fitness goals with expert trainers and world-class equipment.</p>
+            <div class="hero-buttons">
+                <a href="#membership" class="btn btn-primary">
+                    <i class="fas fa-fire"></i> Join Now
+                </a>
+                <a href="#membership" class="btn btn-secondary">
+                    <i class="fas fa-crown"></i> View Membership
+                </a>
+            </div>
+        </div>
+
+        <!-- Animated scroll-down indicator -->
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION D: ABOUT SECTION
+         Two-column layout: gym image + introduction text
+         ============================================================ -->
+    <section class="about" id="about">
+        <div class="section-header animate-on-scroll">
+            <p class="section-label">About Us</p>
+            <h2 class="section-title">WHO WE <span>ARE</span></h2>
+        </div>
+        <div class="about-container">
+            <!-- Left column: Gym image with decorative gold border -->
+            <div class="about-image animate-on-scroll">
+                <img src="https://kimi-web-img.moonshot.cn/img/lakeshoresf.com/5bd209c9df544456faaa53c9747de4d08f20d299.jpg" alt="MGF Gym Workout">
+            </div>
+            <!-- Right column: Text content and feature list -->
+            <div class="about-content animate-on-scroll delay-2">
+                <h3>BUILD YOUR <span>STRENGTH</span></h3>
+                <p>MGF GYM is more than just a fitness center &mdash; it is a community dedicated to transforming lives through health and wellness. Established with a vision to make fitness accessible to everyone, we provide a premium workout experience at affordable prices.</p>
+                <p>Our mission is to empower individuals to achieve their personal best through expert guidance, state-of-the-art equipment, and a supportive environment that motivates you to push beyond your limits.</p>
+                <!-- Feature highlights grid -->
+                <div class="about-features">
+                    <div class="about-feature"><i class="fas fa-dumbbell"></i><span>Modern Equipment</span></div>
+                    <div class="about-feature"><i class="fas fa-certificate"></i><span>Certified Trainers</span></div>
+                    <div class="about-feature"><i class="fas fa-expand"></i><span>Spacious Workout Area</span></div>
+                    <div class="about-feature"><i class="fas fa-heart"></i><span>Friendly Environment</span></div>
+                    <div class="about-feature"><i class="fas fa-bullseye"></i><span>Goal-Focused Training</span></div>
+                    <div class="about-feature"><i class="fas fa-users"></i><span>Community Support</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION E: PROGRAMS SECTION
+         6 training program cards in a responsive grid
+         ============================================================ -->
+    <section class="programs" id="programs">
+        <div class="section-header animate-on-scroll">
+            <p class="section-label">Our Programs</p>
+            <h2 class="section-title">TRAINING <span>PROGRAMS</span></h2>
+            <p class="section-desc">Choose from our wide range of specialized fitness programs designed to help you achieve your specific goals.</p>
+        </div>
+        <div class="programs-grid">
+            <!-- Program 1: Weight Loss -->
+            <div class="program-card animate-on-scroll">
+                <div class="program-icon"><i class="fas fa-fire-alt"></i></div>
+                <h3>Weight Loss</h3>
+                <p>High-intensity cardio and strength circuits designed to burn fat and boost metabolism for rapid, sustainable weight loss.</p>
+                <a href="#contact" class="btn-small">Learn More</a>
+            </div>
+            <!-- Program 2: Weight Gain -->
+            <div class="program-card animate-on-scroll delay-1">
+                <div class="program-icon"><i class="fas fa-weight-hanging"></i></div>
+                <h3>Weight Gain</h3>
+                <p>Structured hypertrophy training with progressive overload techniques to build lean muscle mass effectively.</p>
+                <a href="#contact" class="btn-small">Learn More</a>
+            </div>
+            <!-- Program 3: Strength Training -->
+            <div class="program-card animate-on-scroll delay-2">
+                <div class="program-icon"><i class="fas fa-fist-raised"></i></div>
+                <h3>Strength Training</h3>
+                <p>Powerlifting and Olympic lifting programs to maximize your raw strength and explosive power.</p>
+                <a href="#contact" class="btn-small">Learn More</a>
+            </div>
+            <!-- Program 4: Cardio -->
+            <div class="program-card animate-on-scroll">
+                <div class="program-icon"><i class="fas fa-heartbeat"></i></div>
+                <h3>Cardio</h3>
+                <p>Dynamic cardiovascular workouts including HIIT, running, cycling, and rowing for peak heart health.</p>
+                <a href="#contact" class="btn-small">Learn More</a>
+            </div>
+            <!-- Program 5: Functional Training -->
+            <div class="program-card animate-on-scroll delay-1">
+                <div class="program-icon"><i class="fas fa-running"></i></div>
+                <h3>Functional Training</h3>
+                <p>Movement-based exercises that improve real-world strength, flexibility, and coordination.</p>
+                <a href="#contact" class="btn-small">Learn More</a>
+            </div>
+            <!-- Program 6: Personal Training -->
+            <div class="program-card animate-on-scroll delay-2">
+                <div class="program-icon"><i class="fas fa-user-ninja"></i></div>
+                <h3>Personal Training</h3>
+                <p>One-on-one sessions with certified trainers for personalized workout plans and dedicated attention.</p>
+                <a href="#contact" class="btn-small">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION F: MEMBERSHIP / PRICING SECTION
+         Special offer banner + 3 pricing plan cards
+         ============================================================ -->
+    <section class="membership" id="membership">
+        <div class="section-header animate-on-scroll">
+            <p class="section-label">Pricing</p>
+            <h2 class="section-title">MEMBERSHIP <span>PLANS</span></h2>
+            <p class="section-desc">Flexible membership options designed to fit your budget and fitness goals.</p>
+        </div>
+
+        <!-- Special limited-time offer banner -->
+        <div class="special-offer animate-on-scroll">
+            <div class="offer-badge"><i class="fas fa-fire"></i> LIMITED TIME OFFER (Next Month Only)</div>
+            <h3>SPECIAL DEALS</h3>
+            <p class="subtitle">Grab these exclusive offers before they are gone!</p>
+            <div class="offer-cards">
+                <div class="offer-card">
+                    <h4>2 Months Without Cardio</h4>
+                    <div class="price">&#8377;999</div>
+                    <p style="color: var(--gray); font-size: 0.9rem; margin-top: 10px;">Full gym access + Strength training area</p>
+                </div>
+                <div class="offer-card">
+                    <h4>2 Months With Cardio</h4>
+                    <div class="price">&#8377;1199</div>
+                    <p style="color: var(--gray); font-size: 0.9rem; margin-top: 10px;">Complete gym access including all cardio equipment</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main pricing plans grid -->
+        <div class="pricing-grid">
+            <!-- Plan 1: Regular Membership -->
+            <div class="pricing-card animate-on-scroll">
+                <h3>Regular Membership</h3>
+                <div class="price">&#8377;750<span>/month</span></div>
+                <ul class="features">
+                    <li><i class="fas fa-check"></i> Full Gym Access</li>
+                    <li><i class="fas fa-check"></i> Locker Room</li>
+                    <li><i class="fas fa-check"></i> Basic Equipment</li>
+                    <li><i class="fas fa-check"></i> Shower Facilities</li>
+                </ul>
+                <a href="#contact" class="btn btn-primary" style="width: 100%; justify-content: center;">Get Started</a>
+            </div>
+            <!-- Plan 2: With Cardio (Featured/Best Value) -->
+            <div class="pricing-card featured animate-on-scroll delay-1">
+                <h3>With Cardio</h3>
+                <div class="price">&#8377;750<span>/month</span></div>
+                <ul class="features">
+                    <li><i class="fas fa-check"></i> Everything in Regular</li>
+                    <li><i class="fas fa-check"></i> All Cardio Machines</li>
+                    <li><i class="fas fa-check"></i> Treadmill &amp; Cycling</li>
+                    <li><i class="fas fa-check"></i> Rowing Machines</li>
+                </ul>
+                <a href="#contact" class="btn btn-primary" style="width: 100%; justify-content: center;">Get Started</a>
+            </div>
+            <!-- Plan 3: 3 Months Package -->
+            <div class="pricing-card animate-on-scroll delay-2">
+                <h3>3 Months Package</h3>
+                <div class="price">&#8377;2000<span>/3 months</span></div>
+                <ul class="features">
+                    <li><i class="fas fa-check"></i> Complete Access</li>
+                    <li><i class="fas fa-check"></i> Cardio + Strength</li>
+                    <li><i class="fas fa-check"></i> Save &#8377;250</li>
+                    <li><i class="fas fa-check"></i> Priority Support</li>
+                </ul>
+                <a href="#contact" class="btn btn-primary" style="width: 100%; justify-content: center;">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION G: TRAINERS SECTION
+         4 trainer cards with placeholder photos (ready for real images)
+         ============================================================ -->
+    <section class="trainers" id="trainers">
+        <div class="section-header animate-on-scroll">
+            <p class="section-label">Our Team</p>
+            <h2 class="section-title">EXPERT <span>TRAINERS</span></h2>
+            <p class="section-desc">Meet our certified fitness professionals dedicated to helping you succeed.</p>
+        </div>
+        <div class="trainers-grid">
+            <!-- Trainer 1 -->
+            <div class="trainer-card animate-on-scroll">
+                <div class="trainer-img">
+                    <!-- 
+                        PLACEHOLDER: Replace <i class="fas fa-user placeholder"></i> 
+                        with <img src="trainer1.jpg" alt="Trainer 1"> 
+                        when you add trainer photos
+                    -->
+                    <i class="fas fa-user placeholder"></i>
+                </div>
+                <div class="trainer-info">
+                    <h3>Trainer 1</h3>
+                    <p class="exp">8+ Years Experience</p>
+                    <p class="specialty">Strength &amp; Conditioning Specialist</p>
+                    <div class="trainer-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Trainer 2 -->
+            <div class="trainer-card animate-on-scroll delay-1">
+                <div class="trainer-img">
+                    <i class="fas fa-user placeholder"></i>
+                </div>
+                <div class="trainer-info">
+                    <h3>Trainer 2</h3>
+                    <p class="exp">6+ Years Experience</p>
+                    <p class="specialty">Weight Loss &amp; Nutrition Expert</p>
+                    <div class="trainer-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Trainer 3 -->
+            <div class="trainer-card animate-on-scroll delay-2">
+                <div class="trainer-img">
+                    <i class="fas fa-user placeholder"></i>
+                </div>
+                <div class="trainer-info">
+                    <h3>Trainer 3</h3>
+                    <p class="exp">10+ Years Experience</p>
+                    <p class="specialty">Personal Training &amp; Rehabilitation</p>
+                    <div class="trainer-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <!-- Trainer 4 -->
+            <div class="trainer-card animate-on-scroll delay-3">
+                <div class="trainer-img">
+                    <i class="fas fa-user placeholder"></i>
+                </div>
+                <div class="trainer-info">
+                    <h3>Trainer 4</h3>
+                    <p class="exp">5+ Years Experience</p>
+                    <p class="specialty">CrossFit &amp; Functional Training</p>
+                    <div class="trainer-social">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION H: WHY CHOOSE MGF GYM
+         6 feature cards explaining gym advantages
+         ============================================================ -->
+    <section class="why-choose" id="why-choose">
+        <div class="section-header animate-on-scroll">
+            <p class="section-label">Why Us</p>
+            <h2 class="section-title">WHY CHOOSE <span>MGF GYM</span></h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+                <div>
+                    <h3>Certified Trainers</h3>
+                    <p>All our trainers are nationally certified with years of hands-on experience in fitness training and coaching.</p>
+                </div>
+            </div>
+            <div class="feature-card animate-on-scroll delay-1">
+                <div class="feature-icon"><i class="fas fa-dumbbell"></i></div>
+                <div>
+                    <h3>Modern Equipment</h3>
+                    <p>State-of-the-art machines and free weights from top brands to ensure effective and safe workouts.</p>
+                </div>
+            </div>
+            <div class="feature-card animate-on-scroll delay-2">
+                <div class="feature-icon"><i class="fas fa-tags"></i></div>
+                <div>
+                    <h3>Affordable Membership</h3>
+                    <p>Premium fitness experience at budget-friendly prices. Quality training should not break the bank.</p>
+                </div>
+            </div>
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                <div>
+                    <h3>Flexible Timings</h3>
+                    <p>Open early morning to late night so you can work out whenever fits your schedule best.</p>
+                </div>
+            </div>
+            <div class="feature-card animate-on-scroll delay-1">
+                <div class="feature-icon"><i class="fas fa-hands-helping"></i></div>
+                <div>
+                    <h3>Personal Guidance</h3>
+                    <p>Get one-on-one attention and customized workout plans tailored to your body and goals.</p>
+                </div>
+            </div>
+            <div class="feature-card animate-on-scroll delay-2">
+                <div class="feature-icon"><i class="fas fa-apple-alt"></i></div>
+                <div>
+                    <h3>Nutrition Support</h3>
+                    <p>Expert dietary advice and meal planning to complement your training for maximum results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION I: GALLERY SECTION
+         Responsive image grid with hover zoom effects
+         ============================================================ -->
+    <section class="gallery" id="gallery">
+        <div class="section-header animate-on-scroll">
+            <p class="section-label">Gallery</p>
+            <h2 class="section-title">OUR <span>GALLERY</span></h2>
+        </div>
+        <div class="gallery-grid">
+            <!-- Large featured image (spans 2x2) -->
+            <div class="gallery-item animate-on-scroll">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.pentfitness.com/75d95de40f49a1164b709ac1ee110e2e63bf20c8.jpg" alt="Gym Interior">
+                <span>Gym Interior</span>
+            </div>
+            <div class="gallery-item animate-on-scroll delay-1">
+                <img src="https://kimi-web-img.moonshot.cn/img/public.loadmuscle.com/b8e205dfdba29badc5484bdddec30871e51ad413.jpg" alt="Workout Session">
+                <span>Workout Session</span>
+            </div>
+            <div class="gallery-item animate-on-scroll delay-2">
+                <img src="https://kimi-web-img.moonshot.cn/img/hips.hearstapps.com/6123322fd53cb99edd4701e82e65cddf240900b7.jpg" alt="Equipment">
+                <span>Equipment</span>
+            </div>
+            <div class="gallery-item animate-on-scroll">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.glofox.com/0158b99272b3f8c343589b17af5dd10c5361f108.jpg" alt="Group Class">
+                <span>Group Class</span>
+            </div>
+            <div class="gallery-item animate-on-scroll delay-1">
+                <img src="https://kimi-web-img.moonshot.cn/img/hips.hearstapps.com/9d10e95dde497a39aea239d5731856de459d10dc.jpg" alt="Members">
+                <span>Our Members</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION J: BMI CALCULATOR
+         Interactive tool to calculate Body Mass Index
+         ============================================================ -->
+    <section class="bmi-section" id="bmi">
+        <div class="section-header animate-on-scroll">
+            <p class="section-label">Health Tool</p>
+            <h2 class="section-title">BMI <span>CALCULATOR</span></h2>
+            <p class="section-desc">Check your Body Mass Index to understand your fitness level.</p>
+        </div>
+        <div class="bmi-container animate-on-scroll">
+            <div class="bmi-inputs">
+                <div class="bmi-input-group">
+                    <label for="height">Height (cm)</label>
+                    <input type="number" id="height" placeholder="Enter height in cm" min="50" max="300">
+                </div>
+                <div class="bmi-input-group">
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" id="weight" placeholder="Enter weight in kg" min="20" max="300">
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="calculateBMI()" style="width: 100%; justify-content: center;">
+                <i class="fas fa-calculator"></i> Calculate BMI
+            </button>
+            <!-- Result panel - hidden until calculation is performed -->
+            <div class="bmi-result" id="bmiResult">
+                <div class="bmi-value" id="bmiValue">0.0</div>
+                <div class="bmi-status" id="bmiStatus">Normal</div>
+                <!-- BMI reference scale -->
+                <div class="bmi-scale">
+                    <div class="bmi-scale-item">
+                        <div class="range">&lt; 18.5</div>
+                        <div class="label">Underweight</div>
+                    </div>
+                    <div class="bmi-scale-item">
+                        <div class="range">18.5 - 24.9</div>
+                        <div class="label">Normal</div>
+                    </div>
+                    <div class="bmi-scale-item">
+                        <div class="range">25 - 29.9</div>
+                        <div class="label">Overweight</div>
+                    </div>
+                    <div class="bmi-scale-item">
+                        <div class="range">&ge; 30</div>
+                        <div class="label">Obese</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION K: TESTIMONIALS
+         Customer review cards with star ratings
+         ============================================================ -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header animate-on-scroll">
+            <p class="section-label">Reviews</p>
+            <h2 class="section-title">MEMBER <span>TESTIMONIALS</span></h2>
+        </div>
+        <div class="testimonials-grid">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card animate-on-scroll">
+                <div class="testimonial-header">
+                    <div class="testimonial-img"><i class="fas fa-user"></i></div>
+                    <div class="testimonial-info">
+                        <h4>Rahul Sharma</h4>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                </div>
+                <p>"MGF GYM completely transformed my fitness journey. The trainers are incredibly knowledgeable and the equipment is top-notch. I lost 15kg in 3 months with their weight loss program!"</p>
+            </div>
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card animate-on-scroll delay-1">
+                <div class="testimonial-header">
+                    <div class="testimonial-img"><i class="fas fa-user"></i></div>
+                    <div class="testimonial-info">
+                        <h4>Priya Patel</h4>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                </div>
+                <p>"Best gym in town! The atmosphere is so motivating and the personal training sessions have helped me build strength I never thought possible. Highly recommend to everyone!"</p>
+            </div>
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card animate-on-scroll delay-2">
+                <div class="testimonial-header">
+                    <div class="testimonial-img"><i class="fas fa-user"></i></div>
+                    <div class="testimonial-info">
+                        <h4>Amit Kumar</h4>
+                        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                    </div>
+                </div>
+                <p>"Affordable pricing with premium facilities. The 3-month package is a steal! The trainers push you just enough to help you grow without overwhelming you. Love this place!"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION L: CONTACT SECTION
+         Contact info + Google Map on left, contact form on right
+         ============================================================ -->
+    <section class="contact" id="contact">
+        <div class="section-header animate-on-scroll">
+            <p class="section-label">Get In Touch</p>
+            <h2 class="section-title">CONTACT <span>US</span></h2>
+        </div>
+        <div class="contact-container">
+            <!-- Left column: Contact details and map -->
+            <div class="contact-info animate-on-scroll">
+                <h3>LET'S <span>CONNECT</span></h3>
+                <p>Have questions about our programs or membership? Reach out to us and we will get back to you as soon as possible.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>MGF GYM, Main Road, Your City, State - PIN Code</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>8122430992</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@mgfgym.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Timings</h4>
+                            <p>Mon - Sat: 5:00 AM - 10:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Embedded Google Map (dark themed) -->
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.1234567890123!2d77.12345678901234!3d28.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDA3JzI0LjQiTiA3N8KwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+            <!-- Right column: Contact form -->
+            <div class="contact-form animate-on-scroll delay-2">
+                <h3>SEND A <span style="color: #FFC107;">MESSAGE</span></h3>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" placeholder="How can we help you?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION M: FOOTER
+         Four-column layout: Brand, Quick Links, Membership, Programs
+         ============================================================ -->
+    <footer>
+        <div class="footer-container">
+            <!-- Column 1: Brand info and social links -->
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <!-- Bull logo SVG (same as navbar) -->
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 36px; height: 36px;">
+                        <circle cx="50" cy="50" r="46" fill="none" stroke="#FFC107" stroke-width="3"/>
+                        <rect x="14" y="32" width="3" height="36" rx="1" fill="#FFC107"/>
+                        <rect x="19" y="32" width="3" height="36" rx="1" fill="#FFC107"/>
+                        <rect x="24" y="32" width="3" height="36" rx="1" fill="#FFC107"/>
+                        <rect x="73" y="32" width="3" height="36" rx="1" fill="#FFC107"/>
+                        <rect x="78" y="32" width="3" height="36" rx="1" fill="#FFC107"/>
+                        <rect x="83" y="32" width="3" height="36" rx="1" fill="#FFC107"/>
+                        <rect x="27" y="47" width="46" height="6" rx="2" fill="#FFC107"/>
+                        <path d="M50 20 C42 20, 36 26, 36 34 C36 38, 38 42, 40 44 L38 52 C38 52, 42 50, 50 50 C58 50, 62 52, 62 52 L60 44 C62 42, 64 38, 64 34 C64 26, 58 20, 50 20Z" fill="#FFC107"/>
+                        <path d="M36 28 C32 22, 28 24, 30 30" fill="none" stroke="#FFC107" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M64 28 C68 22, 72 24, 70 30" fill="none" stroke="#FFC107" stroke-width="2.5" stroke-linecap="round"/>
+                        <circle cx="44" cy="36" r="2" fill="#111111"/>
+                        <circle cx="56" cy="36" r="2" fill="#111111"/>
+                        <circle cx="50" cy="46" r="3" fill="none" stroke="#111111" stroke-width="1.5"/>
+                    </svg>
+                    MGF GYM
+                </a>
+                <p>Your journey to a stronger, healthier you starts here. Join MGF GYM today and transform your life with expert guidance and world-class facilities.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <!-- Column 2: Quick Links -->
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+                    <li><a href="#programs"><i class="fas fa-chevron-right"></i> Programs</a></li>
+                    <li><a href="#trainers"><i class="fas fa-chevron-right"></i> Trainers</a></li>
+                    <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            <!-- Column 3: Membership links -->
+            <div class="footer-links">
+                <h4>Membership</h4>
+                <ul>
+                    <li><a href="#membership"><i class="fas fa-chevron-right"></i> Regular Plan</a></li>
+                    <li><a href="#membership"><i class="fas fa-chevron-right"></i> With Cardio</a></li>
+                    <li><a href="#membership"><i class="fas fa-chevron-right"></i> 3 Months Package</a></li>
+                    <li><a href="#membership"><i class="fas fa-chevron-right"></i> Special Offers</a></li>
+                </ul>
+            </div>
+            <!-- Column 4: Programs links -->
+            <div class="footer-links">
+                <h4>Programs</h4>
+                <ul>
+                    <li><a href="#programs"><i class="fas fa-chevron-right"></i> Weight Loss</a></li>
+                    <li><a href="#programs"><i class="fas fa-chevron-right"></i> Weight Gain</a></li>
+                    <li><a href="#programs"><i class="fas fa-chevron-right"></i> Strength Training</a></li>
+                    <li><a href="#programs"><i class="fas fa-chevron-right"></i> Personal Training</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Copyright bar -->
+        <div class="footer-bottom">
+            <p>&copy; 2026 <span>MGF GYM</span>. All Rights Reserved. Built with <i class="fas fa-heart" style="color: #FFC107;"></i> for fitness enthusiasts.</p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+         EXTERNAL JAVASCRIPT FILE
+         All interactive functionality loaded from script.js
+         ============================================================ -->
+    <script src="script.js"></script>
+</body>
+</html>
